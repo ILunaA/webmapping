@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title> leaflet map 1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+		integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+		crossorigin=""/>
+		<!-- Make sure you put this AFTER Leaflet's CSS -->
+		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+		integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+		crossorigin=""></script>
+
+	</head>
+	<body>
+		<h1>Leaflet Map 1</h1>
+
+	 	<div id="map"></div>
+
+		<script>
+		var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
++'contributors',
+maxZoom: 18
+});
+var map = L.map('map', {
+//scrollWheelZoom: false,
+center: [43.424851, -2.683237],
+zoom: 13,
+layers: OSM
+});
+L.control.scale().addTo(map);
+
+
+
+
+		</script>
+
+
+
+
+
+
+
+
+	</body>
+</html>
