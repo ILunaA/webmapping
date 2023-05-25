@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+	<head>
+		<title> leaflet3</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+		integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+		crossorigin=""/>
+		<!-- Make sure you put this AFTER Leaflet's CSS -->
+		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+		integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+		crossorigin=""></script>
+
+	</head>
+	<body>
+		<h1>Leaflet Map 3</h1>
+		<p>Adding markers with custom icons and circle </p>
+
+	 	<div id="map"></div>
+
+		<script>
+		var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+													attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+													+'contributors',
+													maxZoom: 18
+													});
+		/*var cities = L.tileLayer.wms("http://localhost:8080/geoserver/wms", {
+									layers: ['countries','cities','rivers'],
+									format: 'image/png',
+									transparent: true,
+									tiled: true,
+									attribution: "Natural Earth"
+								});*/
+
+var map = L.map('map', {
+//scrollWheelZoom: false,
+center: [43.424851, -2.683237],
+zoom: 11,
+layers: [OSM]
+});
+
+var marker = L.marker([43.424851, -2.683237],
+	{ draggable: true, title: 'Click here' }
+).addTo(map).bindPopup('Izaro irla') .openPopup();
+
+
+	//Añadir un icono de marcador
+	var myIcon = L.icon({
+	iconUrl: 'https://openlayers.org/assets/theme/img/logo70.png',
+	iconSize: [30, 30],
+	popupAnchor: [-1, -10]
+	});
+
+	var myIcon2 = L.icon({
+	iconUrl: 'https://www.freeiconspng.com/thumbs/tree-icon/clean-energy-tree-icon-copy-9.png',
+	iconSize: [30, 30],
+	popupAnchor: [-1, -10]
+	});
+
+
+	var marker2 = L.marker([43.27097759660252, -2.9334230907662677], {icon: myIcon})
+.addTo(map)
+.bindPopup(" Bilboko <b>Gugenheim</b> Museoa");
+
+var marker3 = L.marker([43.3133688087268, -2.679988357573301], {icon: myIcon2})
+.addTo(map)
+.bindPopup("Localización de <b>Mi arbol local </b>");
+
+//Añadir un círculo
+ var circle = L.circle([43.424851, -2.683237],
+	  2000, { color: 'red', fillColor: '#f03', fillOpacity: 0.5 }).addTo(map);
+
+circle.bindPopup("2 Km buffer");
+
+//Añadir un polígono
+var polygon = L.polygon([
+[41.67778, -4.72163],
+[41.67349, -4.71511],
+[41.66958, -4.72017],
+[41.67169, -4.72515] ]).addTo(map) .bindPopup ('Mercaolid');
+
+polygon.bindTooltip ("Soy una etiqueta", {
+permanent: true,
+opacity: 0.5 })
+
+//Añadir una línea
+var pointA = new L.LatLng(41.65925, -4.70404);
+var pointB = new L.LatLng(41.65166, -4.70421);
+var latlngs = [pointA, pointB];
+var polyline = L.polyline( latlngs, {color: 'red'} ) .addTo(map) .bindPopup ('Avda. Juan Carlos I');
+
+
+//add circle
+var circle2 = L.circleMarker([41.62, -4.75]).addTo(map);
+
+circle.bindPopup("Zona metropolitana");
+
+map.on('click', function(e){
+  var lt = String(e.latlng.lat),
+  lg = String(e.latlng.lng);
+  var popup = L.popup()
+    .setLatLng(e.latlng)
+    .setContent(lt + " " + lg)
+    .openOn(map);
+});
+
+
+
+L.control.scale().addTo(map);
+var location = map.getLatLng();
+document.write(location)
+
+
+
+
+		</script>
+
+
+
+
+
+
+
+
+	</body>
+</html>
