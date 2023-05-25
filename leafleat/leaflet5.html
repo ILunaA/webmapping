@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+	<head>
+		<title> leaflet map 1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="./css/style.css" type="text/css">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+		integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+		crossorigin=""/>
+		<!-- Make sure you put this AFTER Leaflet's CSS -->
+		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+		integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+		crossorigin=""></script>
+		<!-- Load css and js for measure plugin -->
+		<link rel="stylesheet" type="text/css" href="./src/leaflet.measure.css" />
+    <script type="text/javascript" src="./src/leaflet.measure.js"></script>
+
+	</head>
+	<body>
+		<h1>Leaflet Map 5</h1>
+		<p>Adding plugin to measure distance and area</p>
+
+	 	<div id="map"></div>
+
+		<script>
+		var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
++'contributors',
+maxZoom: 18
+});
+var map = L.map('map', {
+//scrollWheelZoom: false,
+center: [43.424851, -2.683237],
+zoom: 13,
+layers: OSM
+});
+L.control.scale().addTo(map);
+
+L.Measure = {
+linearMeasurement: "Distance measurement",
+areaMeasurement: "Area measurement",
+start: "click on map to start",
+meter: "m",
+kilometer: "km",
+squareMeter: "m²",
+squareKilometers: "km²",
+};
+
+var measure = L.control.measure({}).addTo(map);
+
+
+
+
+		</script>
+
+
+
+
+
+
+
+
+	</body>
+</html>
